@@ -51,16 +51,20 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:22px}
 .tags span{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 14px;font-size:.85rem;font-weight:500}
 .hero .btns{justify-content:center}
-/* timeline */
-.tl{border-left:2px solid var(--line);padding-left:18px;margin:12px 0 0 6px}
-.tl-item{position:relative;margin-bottom:20px}
-.tl-item::before{content:"";position:absolute;left:-25px;top:8px;width:12px;height:12px;border-radius:50%;background:var(--gold)}
-.tl-item small{color:var(--muted)}
 /* paths */
-.path{display:block;text-decoration:none;border-radius:22px;padding:28px;color:#fff;min-height:200px}
-.path.rel{background:linear-gradient(135deg,#0b4d38,#13845f)}
-.path.tech{background:linear-gradient(135deg,#183f94,#2e6be0)}
-.path h3{font-size:1.6rem}.path p{opacity:.92}.path .go{font-weight:600}
+.path{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;min-height:280px;padding:26px;border-radius:24px;color:#fff;text-decoration:none;background-size:cover;background-position:center;background-repeat:no-repeat;box-shadow:0 12px 30px rgba(0,0,0,.25);transition:transform .25s ease,box-shadow .25s ease}
+.path.rel{background-color:#0b4d38;background-image:linear-gradient(135deg,#0b4d38,#13845f)}
+.path.tech{background-color:#183f94;background-image:linear-gradient(135deg,#183f94,#2e6be0)}
+/* dark shadow layer so text is always readable */
+.path::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.6) 45%,rgba(0,0,0,.25) 100%)}
+.path.rel::after,.path.tech::after{content:"";position:absolute;left:0;right:0;top:0;height:4px;z-index:1}
+.path.rel::after{background:var(--gold)}
+.path.tech::after{background:#7aa5ff}
+.path .kicker{align-self:flex-start;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);margin-bottom:12px}
+.path h3{font-size:1.7rem;margin-bottom:8px;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.path p{opacity:.95;margin-bottom:18px;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.path .go{align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;padding:0 20px;border-radius:999px;background:#fff;color:#10201b;font-weight:600;font-size:.92rem;text-shadow:none}
+@media(hover:hover){.path:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.32)}}
 
 /* ===== swipe scrollers (right to left) ===== */
 .scroller{display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;margin:0 -20px;padding:6px 20px 16px;scroll-padding-left:20px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;scrollbar-width:none}
@@ -110,7 +114,7 @@ footer .social a:hover{background:#1c3a30}
    <button class="theme" id="themeBtn" type="button" aria-label="Switch light or dark theme">Theme</button>
   </div>
   <nav class="links" aria-label="Sections">
-   <a href="#about">About</a><a href="#journey">Journey</a><a href="#paths">Paths</a><a href="#certificates">Certificates</a><a href="#gallery">Gallery</a><a href="#writings">Writings</a><a href="#contact">Contact</a>
+   <a href="#about">About</a><a href="#paths">Paths</a><a href="#certificates">Certificates</a><a href="#gallery">Gallery</a><a href="#writings">Writings</a><a href="#contact">Contact</a>
   </nav>
  </div>
 </header>
@@ -121,9 +125,8 @@ footer .social a:hover{background:#1c3a30}
   <div class="photo" id="profilePhoto" aria-label="Profile photo">SP</div>
   <div class="eyebrow">Islamic Scholar &amp; Product Engineer</div>
   <h1>Sakheer PA</h1>
-  <div class="degree"><span class="r">Al Baqavi</span> · <span class="t">Al Abrari MFB</span></div>
-  <p class="sub">Bridging timeless Islamic philosophy with modern technology: teaching, writing and building web and mobile products.</p>
-  <div class="tags"><span>Islamic Philosopher</span><span>Web Developer</span><span>App Developer</span><span>Entrepreneur</span><span>Technical Support</span></div>
+  <div class="degree"><span class="r">Al Abrari Al Baqavi</span> · <span class="t">Al Abrari ( MFB )</span></div>
+  <div class="tags"><span>Islamic Philosopher</span><span>Web Developer</span><span>App Developer</span><span>AI</span><span>Entrepreneur</span><span>Technical Support</span></div>
   <div class="btns"><a class="btn btn-rel" href="#paths">Explore my work</a><a class="btn btn-out" href="#contact">Contact me</a></div>
  </div>
 </section>
@@ -132,34 +135,23 @@ footer .social a:hover{background:#1c3a30}
  <div class="container">
   <div class="eyebrow">About me</div>
   <div class="grid g2">
-   <p>I am Sakheer PA, An Islamic philosopher. Completed my Islamic studies at BSA College ( Baqiyathu Swalihath Arabic College ), Vellur. Also, I am currently an Aspirant of the BCA programme at IGNOU. Perfoming as Product Engineer. <!--<em>(Sample text: edit to your own words.)</em>--></p>
+   <p>I am Sakheer PA, an Islamic philosopher. I completed my Islamic studies at BSA College (Baqiyathu Swalihath Arabic College), Vellur. I am currently an aspirant pursuing the BCA programme @ IGNOU &amp; working as a Product Engineer.</p>
   </div>
  </div>
 </section>
 
-<section id="journey">
- <div class="container">
-  <div class="eyebrow">Journey</div><h2>Employment &amp; experience</h2>
-  <div class="grid g3">
-   <div><h3>Education</h3><div class="tl" id="edu"></div></div>
-   <div><h3>Employment</h3><div class="tl" id="emp"></div></div>
-   <div><h3>Experience</h3><div class="tl" id="exp"></div></div>
-  </div>
- </div>
-</section>
-
-<section id="paths" class="alt">
+<section id="paths">
  <div class="container">
   <div class="eyebrow">Two worlds, one purpose</div><h2>Choose a path</h2>
   <p class="sub">Each section opens its own website.</p>
   <div class="grid g2">
-   <a class="path rel" id="relLink" href="#" target="_blank" rel="noopener"><h3>Religious</h3><p>Islamic studies, philosophy, lectures, articles and community guidance.</p><span class="go">Visit religious site →</span></a>
-   <a class="path tech" id="techLink" href="#" target="_blank" rel="noopener"><h3>Technical</h3><p>Web development, app development, product building and technical support.</p><span class="go">Visit technical site →</span></a>
+   <a class="path rel" id="relLink" href="#" target="_blank" rel="noopener"><span class="kicker">Religious</span><h3>Islamic Knowledge</h3><p>Islamic studies, philosophy, lectures, articles and community guidance.</p><span class="go">Visit religious site →</span></a>
+   <a class="path tech" id="techLink" href="#" target="_blank" rel="noopener"><span class="kicker">Technical</span><h3>Technology &amp; Products</h3><p>Web development, app development, product building and technical support.</p><span class="go">Visit technical site →</span></a>
   </div>
  </div>
 </section>
 
-<section id="certificates">
+<section id="certificates" class="alt">
  <div class="container">
   <div class="eyebrow">Credentials</div><h2>Certificates</h2>
   <p class="sub">Swipe each row to see more. Tap a certificate to view it big.</p>
@@ -167,7 +159,7 @@ footer .social a:hover{background:#1c3a30}
  </div>
 </section>
 
-<section id="gallery" class="alt">
+<section id="gallery">
  <div class="container">
   <div class="eyebrow">Moments</div><h2>Photos &amp; videos</h2>
   <p class="hint">Swipe to browse. Tap a photo to enlarge, tap again to zoom.</p>
@@ -175,7 +167,7 @@ footer .social a:hover{background:#1c3a30}
  </div>
 </section>
 
-<section id="writings">
+<section id="writings" class="alt">
  <div class="container">
   <div class="eyebrow">Daily status</div><h2>Status &amp; writings</h2>
   <p class="hint">Swipe to read more.</p>
@@ -201,27 +193,16 @@ footer .social a:hover{background:#1c3a30}
 
 <script>
 /* ===== EDIT YOUR CONTENT HERE ===== */
-var profilePhoto = "";   // e.g. "images/me.jpg"
+var profilePhoto = "Profile.jpeg";   // e.g. "images/me.jpg"
 var religiousSite = "https://example.com/religious";
 var technicalSite = "https://example.com/technical";
+var religiousBg = "Rj.jpeg";   // e.g. "images/religious-bg.jpg"
+var technicalBg = "tech.jpeg";   // e.g. "images/technical-bg.jpg"
 
-var education = [
- {t:"Al Baqavi & Al Abrari MFB", d:"BSA College, Vellur", y:"Sample: 2012 – 2021"},
- {t:"BCA (Aspirant)", d:"IGNOU University", y:"Sample: 2025 – present"}
-];
-var employment = [
- {t:"Product Engineer", d:"Your company / self-employed", y:"Sample: 2022 – present"},
- {t:"Teacher / Mudarris", d:"Your institution", y:"Sample: 2021 – 2022"}
-];
-var experience = [
- {t:"Web & App Development", d:"Business sites, mobile apps, client projects", y:"Sample: 3+ years"},
- {t:"Technical Support", d:"Hardware, software and network help", y:"Sample: 2+ years"},
- {t:"Islamic Lectures & Writing", d:"Talks, articles, community classes", y:"Sample: ongoing"}
-];
 /* name = text written on the box, img = certificate image path */
 var certificates = [
- {row:"Religious certificates", items:[{name:"Al Baqavi Certificate", img:""},{name:"Al Abrari MFB Certificate", img:""},{name:"Add certificate", img:""}]},
- {row:"Technical certificates", items:[{name:"Web Development", img:""},{name:"App Development", img:""},{name:"Add certificate", img:""}]},
+ {row:"Religious certificates", items:[{name:"Al Baqavi Certificate", img:"bq.jpeg"},{name:"Al Abrari MFB Certificate", img:""},{name:"Add certificate", img:""}]},
+ {row:"Technical certificates", items:[{name:"Web Development", img:"bt.jpeg"},{name:"App Development", img:""},{name:"Add certificate", img:""}]},
  {row:"Other achievements", items:[{name:"Add certificate", img:""},{name:"Add certificate", img:""},{name:"Add certificate", img:""}]}
 ];
 /* gallery: just add photo paths in src */
@@ -230,7 +211,9 @@ var gallery = [
  {type:"video", src:"", cap:"Video 1"},{type:"image", src:"Pic.jpeg", cap:"Photo 3"},
  {type:"image", src:"", cap:"Photo 4"},{type:"image", src:"Religious.jpeg", cap:"Photo 5"},
  {type:"image", src:"", cap:"Photo 4"},{type:"image", src:"Islamic.jpeg", cap:"Photo 6"},
- {type:"image", src:"", cap:"Photo 4"},{type:"image", src:"Enjoy.jpeg", cap:"Photo 7"}
+ {type:"image", src:"", cap:"Photo 4"},{type:"image", src:"Enjoy.jpeg", cap:"Photo 7"},
+ {type:"image", src:"", cap:"Photo 1"},{type:"image", src:"Sunglass.jpeg", cap:"Photo 1"},
+ {type:"video", src:"", cap:"Video 1"},{type:"image", src:"Pic.Tour2", cap:"Photo 3"}
 ];
 var posts = [
  {date:"Sample · 24 Oct 2026", text:"Knowledge without action is a tree without fruit. Write your own status here."},
@@ -246,11 +229,11 @@ var social = [
 /* ===== END OF EDIT AREA ===== */
 
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
-function tl(id,arr){document.getElementById(id).innerHTML=arr.map(function(i){return '<div class="tl-item"><strong>'+esc(i.t)+'</strong><br>'+esc(i.d)+'<br><small>'+esc(i.y)+'</small></div>'}).join("")}
-tl("edu",education);tl("emp",employment);tl("exp",experience);
 
 document.getElementById("relLink").href=religiousSite;
 document.getElementById("techLink").href=technicalSite;
+if(religiousBg){document.getElementById("relLink").style.backgroundImage='url("'+religiousBg+'")'}
+if(technicalBg){document.getElementById("techLink").style.backgroundImage='url("'+technicalBg+'")'}
 if(profilePhoto){document.getElementById("profilePhoto").innerHTML='<img src="'+esc(profilePhoto)+'" alt="Sakheer PA">'}
 
 /* certificates: swipe rows, half-visible boxes with title */
